@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioServiceService } from '../services/usuario-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ParcheServiceService } from '../services/parche-service.service';
+import { ParcheUsuarioService } from '../services/parche-usuario.service';
 
 @Component({
   selector: 'app-ver-parche',
@@ -75,5 +76,8 @@ export class VerParcheComponent implements OnInit {
 
     }
   
+}
+volver(){
+  this.router.navigate(['/principalU/'+this.id]);
 }
 }

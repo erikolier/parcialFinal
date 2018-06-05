@@ -11,5 +11,5 @@ export class MisParchesComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  
 }

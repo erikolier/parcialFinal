@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuarioServiceService } from '../services/usuario-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ParcheServiceService } from '../services/parche-service.service';
+import { ParcheUsuarioService } from '../services/parche-usuario.service';
 
 
 @Component({
@@ -14,6 +15,10 @@ export class InfoParcheComponent implements OnInit {
   idParche:string;
   usuario:any;
   parche:any;
+  parcheUsuario:any={
+    nick:'',
+    parche:''
+  }
   rumbaCoin:Number;
   parcheCompleto:boolean;
   valorActual:Number;
@@ -24,18 +29,23 @@ export class InfoParcheComponent implements OnInit {
   nombre:string;
   valorMinimo:number;
   valorObjetivo:number;
+  nombrePU:string;
+  parchePU:string;
   constructor(private service: UsuarioServiceService,private router:Router,private route:ActivatedRoute,
-    private servicio: ParcheServiceService) { 
+    private servicio: ParcheServiceService,private servicioParchUs:ParcheUsuarioService) { 
       route.params.subscribe(params=>{this.id=params['id'];});
       route.params.subscribe(params=>{this.idParche=params['parche'];});
+      
       this.service.ListaUsuario().subscribe(user=>{
         
         for(let index=0;index<user.length;index++){
           if(user[index].id===this.id){
             this.nick=user[index].nick;
             this.pass=user[index].pass;
+            this.nombrePU=user[index].nick;
             this.usuario=user[index];
             this.rumbaCoin=user[index].rumbaCoin;
+
             console.log(this.usuario);
             break;
           }else if(index+1===user.length && user[index].id !=this.id){
@@ -50,6 +60,7 @@ export class InfoParcheComponent implements OnInit {
         
         for(let index=0;index<parch.length;index++){
           if(parch[index].id===this.idParche){
+            this.parchePU=parch[index].nombre;
             this.contra=parch[index].contra;
             this.descripcion=parch[index].descripcion;
             this.nombre=parch[index].nombre;
@@ -67,6 +78,22 @@ export class InfoParcheComponent implements OnInit {
         
         
       })
+      this.servicioParchUs.ListaParcheU().subscribe(UP=>{
+        
+        for(let index=0;index<UP.length;index++){
+          if(UP[index].parche===this.parchePU){
+              alert("ya ha consignado aqui");
+          }else if(UP[index].parche != this.parchePU && index+1===UP.length){
+            alert("no ha consignado aca");
+            this.parcheUsuario.nick=this.nombrePU;
+            this.parcheUsuario.parche=this.parchePU;
+            console.log(this.parcheUsuario);
+          }
+        }
+        
+        
+      })
+      
     }
 
  
@@ -90,6 +117,7 @@ export class InfoParcheComponent implements OnInit {
     valorMinimo:this.valorMinimo,
     valorObjetivo:this.valorObjetivo
   }
+  
   editar(parche,usuario){
     this.editarParche=parche;
     this.editarUsuario=usuario;
@@ -108,6 +136,10 @@ export class InfoParcheComponent implements OnInit {
         this.editarUsuario.rumbaCoin=o;
         this.servicio.editarParche(this.editarParche);
         this.service.editarUsuario(this.editarUsuario);
+        if(this.parcheUsuario.parche===this.parchePU){
+          this.servicioParchUs.agregarParche(this.parcheUsuario);
+          alert("se ha agregado correctamente a sus parches");
+        }
         alert("Transaccion completada correctamente");
       }else{
         this.editarParche.parcheCompleto=false;
@@ -115,9 +147,15 @@ export class InfoParcheComponent implements OnInit {
         this.editarUsuario.rumbaCoin=o;
         this.servicio.editarParche(this.editarParche);
         this.service.editarUsuario(this.editarUsuario);
-        
+        if(this.parcheUsuario.parche===this.parchePU){
+          this.servicioParchUs.agregarParche(this.parcheUsuario);
+          alert("se ha agregado correctamente a sus parches");
+        }
         alert("Transaccion completada correctamente, no se ha completado el valor objetivo");
       }
     }
+  }
+  volver(){
+    this.router.navigate(['/verParches/'+this.id+'/'+this.idParche]);
   }
 }

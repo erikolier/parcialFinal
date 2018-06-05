@@ -1,3 +1,8 @@
-<p>
-  mis-parches works!
-</p>
+<h3>Lista de Parches en las que has consignado</h3>
+<div class="alert alert-warning" role="alert" *ngFor="let item of lista">
+  {{item.parche}} 
+  <div class="float-right" (click)="buscar(item)">
+    <i class="fab fa-sistrix"></i>
+
+</div>
+  </div>

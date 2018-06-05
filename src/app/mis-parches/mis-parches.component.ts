@@ -23,6 +23,7 @@ export class MisParchesComponent implements OnInit {
   parches:any;
   constructor(private service: UsuarioServiceService,private router:Router,private route:ActivatedRoute,
     private servicio: ParcheServiceService,private servicioParche: ParcheUsuarioService) { 
+      
       route.params.subscribe(params=>{this.id=params['id'];});
       this.service.ListaUsuario().subscribe(user=>{
         
@@ -48,7 +49,7 @@ export class MisParchesComponent implements OnInit {
         for(let index=0;index<this.parche.length;index++){
         if(this.parche[index].nick===this.nick){
           this.lista=this.parche;
-          break;
+          
         }else if(this.parche[index].nick!=this.nick && index+1===this.parche.lenght){
           alert("usted no ha consignado en ningun parche");
         }
@@ -57,6 +58,7 @@ export class MisParchesComponent implements OnInit {
       })
     }
   ngOnInit() {
+    
   }
   buscar(item){
     this.servicio.ListaParche().subscribe(parch=>{

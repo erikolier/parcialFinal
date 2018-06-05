@@ -81,9 +81,9 @@ export class InfoParcheComponent implements OnInit {
       this.servicioParchUs.ListaParcheU().subscribe(UP=>{
         
         for(let index=0;index<UP.length;index++){
-          if(UP[index].parche===this.parchePU){
+          if(UP[index].nick===this.nombrePU){
               alert("ya ha consignado aqui");
-          }else if(UP[index].parche != this.parchePU && index+1===UP.length){
+          }else if(UP[index].nick != this.nombrePU && index+1===UP.length){
             alert("no ha consignado aca");
             this.parcheUsuario.nick=this.nombrePU;
             this.parcheUsuario.parche=this.parchePU;
@@ -127,10 +127,11 @@ export class InfoParcheComponent implements OnInit {
       alert("no tiene suficientes rumba coins");
     }else if(this.editarParche.valorActual<this.editarParche.valorMinimo){
       alert("el valor minimo a consignar es de "+this.editarParche.valorMinimo);
-    }else if(this.rumbaCoin>this.editarParche.valorActual && this.editarParche.valorActual>=this.editarParche.valorMinimo){
+    }else if(this.editarParche.valorActual>=this.editarParche.valorMinimo){
       let i=this.servicio.suma(this.editarParche.valorActual,this.valorActual);
       let o=this.service.resta(this.rumbaCoin,this.editarParche.valorActual);
-      if(this.editarParche.valorActual>=i){
+      if(i>this.valorObjetivo){
+      
         this.editarParche.parcheCompleto=true;
         this.editarParche.valorActual=i;
         this.editarUsuario.rumbaCoin=o;
@@ -141,6 +142,7 @@ export class InfoParcheComponent implements OnInit {
           alert("se ha agregado correctamente a sus parches");
         }
         alert("Transaccion completada correctamente");
+      
       }else{
         this.editarParche.parcheCompleto=false;
         this.editarParche.valorActual=i;

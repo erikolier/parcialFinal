@@ -1,23 +1,37 @@
+<div class="container-flow jumbotron">
+    <div class="row"> 
+      <div class="col-12">
 
-<div>
 <h3>
  Nombre del parche: {{parche.nombre}}
 </h3>
+</div>
+<div class="col-12">
 <h3>
     Valor Objetivo Del Parche: {{parche.valorObjetivo}}
 </h3>
+</div>
+<div class="col-12">
 <h3>
     Valor Actual del Parche: {{parche.valorActual}}
 </h3>
+</div>
+<div class="col-12">
 <h3>
     Valor Mìnimo a consignar: {{parche.valorMinimo}}
 </h3>
+</div>
+<div class="col-12">
+  
 <h3>
     Tu nombre: {{usuario.nick}}
 </h3>
+</div>
+<div class="col-12">
 <h3>
     Tus fondos: {{usuario.rumbaCoin}}
 </h3>
+</div>
 </div>
 
 <div class="float-right mx-3" (click)="editar(parche,usuario)" data-toggle="modal" data-target="#exampleModal">

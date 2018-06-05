@@ -54,22 +54,22 @@ export class VerParcheComponent implements OnInit {
 
   ngOnInit() {
   }
-  iniciarSesion(nombre:string,contra:string){
+  iniciarSesion(contra:string){
     
     
     for (let index=0;index<this.parche.length;index++){
-      if(this.parche[index].nombre===nombre && this.parche[index].contra === contra){
-        alert("Bienvenido " + nombre);
+      if(this.parche[index].id===this.idParche && this.parche[index].contra === contra){
+        alert("Bienvenido a" + this.parche[index].nombre);
         this.router.navigate(['/infoParche/'+this.id+'/'+this.idParche]);
         break;
-      }else if(index === (this.parche.length-1) && this.parche[index].nombre!= nombre && this.parche[index].contra != contra){
-        alert("cuenta o contraseña incorrectaa");
+      }else if(index === (this.parche.length-1) && this.parche[index].id!= this.idParche && this.parche[index].contra != contra){
+        alert(" contraseña incorrectaa");
         break;
       }
-      else if(index === (this.parche.length-1) && this.parche[index].nombre === nombre && this.parche[index].contra != contra){
-        alert("cuenta o contraseña incorrecta");
+      else if(index === (this.parche.length-1) && this.parche[index].id === this.idParche && this.parche[index].contra != contra){
+        alert("contraseña incorrecta");
         break;
-      }else if(nombre==='' || contra==='' ){
+      }else if(contra==='' ){
         alert("Uno de los campos está vacío o incorrecto");
         break;
       }    

@@ -1,14 +1,10 @@
 <div class="container jumbotron">
     <div class="row">
     <div class="form-group col-12">
-        <label for="exampleInputPassword1">Nombre del parche</label>
-    <input type="text" class="form-control"  placeholder="Enter nick" #nombre>
-    </div>
-      <div class="form-group col-12">
         <label for="exampleInputPassword1">Password</label>
         <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" #contra>
       </div>
-    <button type="submit" class="btn btn-primary" (click)="iniciarSesion(nombre.value,contra.value)" routerLinkActive="active" >Submit</button>
+    <button type="submit" class="btn btn-primary" (click)="iniciarSesion(contra.value)" routerLinkActive="active" >Submit</button>
     <button type="submit" class="btn btn-primary " routerLinkActive="active" (click)="volver()" >Volver</button>
     </div>
     </div>

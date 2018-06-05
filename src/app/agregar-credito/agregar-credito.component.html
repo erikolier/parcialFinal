@@ -1,6 +1,11 @@
-
-<h3>Bienvenido {{usuario.nick}}</h3>
+<div class="container-flow jumbotron">
+    <div class="row"> 
+      <div class="col-12">
+          <h3>Bienvenido {{usuario.nick}}</h3>
+      </div>
+<div class="col-12">
 <h3>tu saldo: {{usuario.rumbaCoin}}</h3>
+</div>
 
 <div class="float-right mx-3" (click)="editar(usuario)" data-toggle="modal" data-target="#exampleModal">
     <button class="btn btn-secondary">Añadir Rumba coins</button>
@@ -34,3 +39,6 @@
       </div>
     </div>
   </div>
+  </div>
+  </div>
+

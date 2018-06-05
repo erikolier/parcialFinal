@@ -1,0 +1,20 @@
+<form (ngSubmit)="agregar()">
+    <h5>Contraseña</h5>
+    <input type="text" placeholder="ingresa contraseña del parche" name="contra" class="form-control"
+    [(ngModel)]="parche.contra">
+    <h5>Descripción</h5>
+    <input type="text" placeholder="ingresa descripcion del parche" name="descripcion" class="form-control"
+    [(ngModel)]="parche.descripcion">
+    <h5>Nombre</h5>
+    <input type="text" placeholder="ingresa nombre del parche" name="nombre" class="form-control"
+    [(ngModel)]="parche.nombre">
+    <h5>Valor Minimo</h5>
+    <input type="text" placeholder="ingresa el valor minimo a consignar" name="valorMinimo" class="form-control"
+    [(ngModel)]="parche.valorMinimo">
+    <h5>Valor Objetivo</h5>
+    <input type="text" placeholder="ingresa el valor objetivo de la vaca" name="valorObjetivo" class="form-control"
+    [(ngModel)]="parche.valorObjetivo">
+    <button class="btn btn-warning mt-3" type="submit">Agregar</button>
+    <button class="btn btn-warning mt-3" (click)="volver()">Volver</button>
+  </form>
+  

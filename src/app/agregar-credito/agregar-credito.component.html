@@ -1,0 +1,36 @@
+
+<h3>Bienvenido {{usuario.nick}}</h3>
+<h3>tu saldo: {{usuario.rumbaCoin}}</h3>
+
+<div class="float-right mx-3" (click)="editar(usuario)" data-toggle="modal" data-target="#exampleModal">
+    <button class="btn btn-secondary">Añadir Rumba coins</button>
+  </div>
+  <div class="float-right mx-3" (click)="volver()">
+      <button class="btn btn-secondary">Volver</button>
+    </div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Digita la cantidad de Rumba coins que deseas añadir</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          
+          <form (ngSubmit)="agregarUsuarioEditado()">
+            <input type="text" placeholder="ingresa la cantidad" name="name" class="form-control"
+            [(ngModel)]="editarUsuario.rumbaCoin">
+            <button class="btn btn-warning mt-3" type="submit" >Añadir</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          
+        </div>
+      </div>
+    </div>
+  </div>

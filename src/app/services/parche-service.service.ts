@@ -27,4 +27,18 @@ export class ParcheServiceService {
   agregarParche(parch:parche){
     this.itemsCollection.add(parch);
   }
+  editarParche(parche){
+    this.itemDoc=this.afs.doc<parche>(`parche/${parche.id}`);
+    this.itemDoc.update(parche);
+  }
+  suma(num1,num2){
+    let i=Number(num1);
+    let o=Number(num2);
+    return i+o;
+  }
+  resta(num1,num2){
+    let i=Number(num1);
+    let o=Number(num2);
+    return i-o;
+  }
 }

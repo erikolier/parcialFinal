@@ -14,6 +14,16 @@ export class InfoParcheComponent implements OnInit {
   idParche:string;
   usuario:any;
   parche:any;
+  rumbaCoin:Number;
+  parcheCompleto:boolean;
+  valorActual:Number;
+  nick:string;
+  pass:string;
+  contra:string;
+  descripcion:string;
+  nombre:string;
+  valorMinimo:number;
+  valorObjetivo:number;
   constructor(private service: UsuarioServiceService,private router:Router,private route:ActivatedRoute,
     private servicio: ParcheServiceService) { 
       route.params.subscribe(params=>{this.id=params['id'];});
@@ -22,8 +32,10 @@ export class InfoParcheComponent implements OnInit {
         
         for(let index=0;index<user.length;index++){
           if(user[index].id===this.id){
-            
+            this.nick=user[index].nick;
+            this.pass=user[index].pass;
             this.usuario=user[index];
+            this.rumbaCoin=user[index].rumbaCoin;
             console.log(this.usuario);
             break;
           }else if(index+1===user.length && user[index].id !=this.id){
@@ -38,8 +50,13 @@ export class InfoParcheComponent implements OnInit {
         
         for(let index=0;index<parch.length;index++){
           if(parch[index].id===this.idParche){
-            
+            this.contra=parch[index].contra;
+            this.descripcion=parch[index].descripcion;
+            this.nombre=parch[index].nombre;
+            this.valorMinimo=parch[index].valorMinimo;
+            this.valorObjetivo=parch[index].valorObjetivo;
             this.parche=parch[index];
+            this.valorActual=parch[index].valorActual;
             console.log(this.parche);
             break;
           }else if(index+1===parch.length && parch[index].id !=this.id){
@@ -52,7 +69,55 @@ export class InfoParcheComponent implements OnInit {
       })
     }
 
+ 
   ngOnInit() {
+    
   }
-
+  
+  editarUsuario:any={
+    id:this.id,
+    nick:this.nick,
+    pass:this.pass,
+    rumbaCoin:''
+  }
+  editarParche:any={
+    id:this.idParche,
+    contra:this.contra,
+    descripcion:this.descripcion,
+    nombre:this.nombre,
+    parcheCompleto:'',
+    valorActual:'',
+    valorMinimo:this.valorMinimo,
+    valorObjetivo:this.valorObjetivo
+  }
+  editar(parche,usuario){
+    this.editarParche=parche;
+    this.editarUsuario=usuario;
+  }
+  agregarParcheYUsuarioEditado(){
+    if(this.rumbaCoin<this.editarParche.valorActual){
+      alert("no tiene suficientes rumba coins");
+    }else if(this.editarParche.valorActual<this.editarParche.valorMinimo){
+      alert("el valor minimo a consignar es de "+this.editarParche.valorMinimo);
+    }else if(this.rumbaCoin>this.editarParche.valorActual && this.editarParche.valorActual>=this.editarParche.valorMinimo){
+      let i=this.servicio.suma(this.editarParche.valorActual,this.valorActual);
+      let o=this.service.resta(this.rumbaCoin,this.editarParche.valorActual);
+      if(this.editarParche.valorActual>=i){
+        this.editarParche.parcheCompleto=true;
+        this.editarParche.valorActual=i;
+        this.editarUsuario.rumbaCoin=o;
+        this.servicio.editarParche(this.editarParche);
+        this.service.editarUsuario(this.editarUsuario);
+        alert("Transaccion completada correctamente");
+      }else{
+        this.editarParche.parcheCompleto=false;
+        this.editarParche.valorActual=i;
+        this.editarUsuario.rumbaCoin=o;
+        this.servicio.editarParche(this.editarParche);
+        this.service.editarUsuario(this.editarUsuario);
+        
+        alert("Transaccion completada correctamente, no se ha completado el valor objetivo");
+      }
+    }
+  }
 }

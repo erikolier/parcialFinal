@@ -35,4 +35,9 @@ export class UsuarioServiceService {
     let o=Number(num2);
     return i+o;
   }
+  resta(num1,num2){
+    let i=Number(num1);
+    let o=Number(num2);
+    return i-o;
+  }
 }

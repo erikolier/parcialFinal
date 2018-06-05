@@ -1,7 +1,10 @@
 <div class="alert alert-warning" role="alert" *ngFor="let item of parche">
     {{item.nombre}} 
-    
-    <div class="float-right" >
+    <div class="float-right" (click)="buscar(item)">
+        <i class="fab fa-sistrix"></i>
+
+    </div>
+    <div class="float" >
       <p>parche completo: {{item.parcheCompleto}}</p>
     </div>
     </div>

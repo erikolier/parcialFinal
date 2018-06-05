@@ -40,7 +40,9 @@ export class BuscarParcheComponent implements OnInit {
 
   ngOnInit() {
   }
-  ver(){
-    this.router.navigate(['/verParches/'+this.id]);
+  
+  buscar(item){
+    
+    this.router.navigate(['/verParches/'+this.id+'/'+item.id]);
   }
 }

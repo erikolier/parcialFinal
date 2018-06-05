@@ -55,7 +55,8 @@ import { VerParcheComponent } from './ver-parche/ver-parche.component';
       {path:'crearU',component:CrearCuentaComponent},
       {path:'saldo/:id',component:AgregarCreditoComponent},
       {path:'misParches/:id',component:MisParchesComponent},
-      {path:'verParches/:id',component:VerParcheComponent},
+      {path:'verParches/:id/:parche',component:VerParcheComponent},
+      {path:'infoParche/:id/:parche',component:InfoParcheComponent},
       {path:'**',redirectTo:''}
     ])
   ],

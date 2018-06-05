@@ -77,4 +77,7 @@ export class MisParchesComponent implements OnInit {
     })
     
   }
+  volver(){
+    this.router.navigate(['/principalU/'+this.id]);
+  }
 }
